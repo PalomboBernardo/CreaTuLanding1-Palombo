@@ -1,0 +1,44 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.nav__brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.nav__logo {
+    font-size: 1.4rem;
+}
+
+.nav__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+.nav__links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav__links a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 600;
+}
+
+.nav__links a:hover {
+    text-decoration: underline;
+}

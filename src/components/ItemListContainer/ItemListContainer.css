@@ -1,0 +1,33 @@
+.ilc {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.ilc__title {
+    margin: 0 0 .5rem;
+    font-size: 1.4rem;
+    color: #0f172a;
+}
+
+.ilc__text {
+    margin: 0 0 1rem;
+    color: #475569;
+}
+
+.ilc__placeholder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: .75rem;
+}
+
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #f9fafb;
+    font-weight: 600;
+    color: #111827;
+}
