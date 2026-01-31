@@ -1,5 +1,3 @@
-// src/services/mocks/products.js
-
 // Helper para armar URLs de imágenes locales con Vite
 const img = (relativePath) => new URL(relativePath, import.meta.url).href;
 
@@ -16,9 +14,7 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
  */
 
 export const DATA = [
-    // =========================
-    // FERTILIZANTES (IVA 10.5%)
-    // =========================
+
     {
         id: "top-phos-280",
         title: "TOP-PHOS 280 HP",
@@ -70,9 +66,6 @@ export const DATA = [
         image: img("../../assets/products/fertilizantes/green-start.jpg"),
     },
 
-    // ==========================
-    // BIOESTIMULANTES (IVA 10.5%)
-    // ==========================
     {
         id: "fertiactyl-gz",
         title: "FERTIACTYL GZ",
@@ -130,9 +123,6 @@ export const DATA = [
         image: img("../../assets/products/bioestimulantes/seactiv-vital.jpg"),
     },
 
-    // ======================
-    // HERBICIDAS (IVA 21%)
-    // ======================
     {
         id: "dual-gold",
         title: "DUAL GOLD",
@@ -176,9 +166,6 @@ export const DATA = [
         image: img("../../assets/products/herbicidas/enelan.jpg"),
     },
 
-    // =========================
-    // INSECTICIDAS (IVA 21%)
-    // =========================
     {
         id: "ampligo",
         title: "AMPLIGO",
@@ -222,9 +209,6 @@ export const DATA = [
         image: img("../../assets/products/insecticidas/karate-zeon.jpg"),
     },
 
-    // ======================
-    // FUNGICIDAS (IVA 21%)
-    // ======================
     {
         id: "amistar-xtra",
         title: "AMISTAR XTRA",
@@ -269,7 +253,7 @@ export const DATA = [
     },
 ];
 
-// ✅ API mock requerida por la entrega (Promises + delay)
+// ✅ API mock (Promises + delay)
 export const products = {
     getProducts: async () => {
         await delay(600);
