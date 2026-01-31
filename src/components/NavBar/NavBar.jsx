@@ -1,22 +1,51 @@
+import { NavLink } from "react-router-dom";
+import CartWidget from "../CartWidget/CartWidget.jsx";
 import "./NavBar.css";
-import CartWidget from "../CartWidget/CartWidget.jsx"
 
-const NavBar = () => {
+const NavBar = ({ totalItems = 0 }) => {
+    const linkClass = ({ isActive }) => (isActive ? "nav__link nav__link--active" : "nav__link");
+
     return (
         <header className="nav">
-            <div className="nav__brand">
-                <span className="nav__logo">🛍️</span>
-                <h1 className="nav__title">Mi Tienda</h1>
+            <div className="container nav__inner">
+                <div className="nav__left">
+                    <NavLink to="/" className="nav__brand">
+                        AgroStore
+                    </NavLink>
+
+                    <NavLink to="/tienda" className={linkClass}>
+                        Tienda
+                    </NavLink>
+
+                    <NavLink to="/services" className={linkClass}>
+                        Servicios
+                    </NavLink>
+
+                    <NavLink to="/contact" className={linkClass}>
+                        Contacto
+                    </NavLink>
+                </div>
+
+                <div className="nav__right">
+                    <NavLink to="/category/fertilizantes" className={linkClass}>
+                        Fertilizantes
+                    </NavLink>
+                    <NavLink to="/category/herbicidas" className={linkClass}>
+                        Herbicidas
+                    </NavLink>
+                    <NavLink to="/category/insecticidas" className={linkClass}>
+                        Insecticidas
+                    </NavLink>
+                    <NavLink to="/category/fungicidas" className={linkClass}>
+                        Fungicidas
+                    </NavLink>
+                    <NavLink to="/category/bioestimulantes" className={linkClass}>
+                        Bioestimulantes
+                    </NavLink>
+
+                    <CartWidget totalItems={totalItems} />
+                </div>
             </div>
-
-            <nav className="nav__links">
-                <a href="#inicio">Inicio</a>
-                <a href="#productos">Productos</a>
-                <a href="#ofertas">Ofertas</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-
-            <CartWidget />
         </header>
     );
 };

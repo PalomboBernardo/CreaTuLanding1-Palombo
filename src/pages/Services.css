@@ -1,0 +1,15 @@
+.page {
+    padding: 16px;
+}
+
+.page__title {
+    margin: 0 0 10px;
+}
+
+.servicesList {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 6px;
+    opacity: 0.9;
+}

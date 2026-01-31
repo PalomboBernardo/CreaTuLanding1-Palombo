@@ -1,23 +1,29 @@
+/* src/components/CartWidget/CartWidget.css */
 .cartWidget {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: .5rem;
-    border: 1px solid #e5e7eb;
-    background: #fff;
-    padding: .4rem .7rem;
+    gap: .55rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: .45rem .75rem;
     border-radius: 999px;
-    cursor: pointer;
-    font-weight: 600;
+    font-weight: 800;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+.cartWidget:hover {
+    border-color: #cbd5e1;
 }
 
 .cartCount {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 8px;
     border-radius: 999px;
-    background: #111827;
-    color: #fff;
+    background: var(--primary);
+    color: white;
     font-size: .85rem;
 }

@@ -1,0 +1,102 @@
+:root {
+    --bg: #f6f8fc;
+    --card: #ffffff;
+    --border: #e6e9f2;
+    --text: #0f172a;
+    --muted: #64748b;
+    --primary: #2563eb;
+}
+
+.itemCard {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+    overflow: hidden;
+    /* ✅ CLAVE: nada puede salir del card */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+/* ✅ Marco fijo tipo e-commerce */
+.itemCard__imgWrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    /* ✅ siempre mismo alto relativo */
+    background: #f8fafc;
+    overflow: hidden;
+    /* ✅ CLAVE: recorta lo que sobresalga */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /* ✅ padding no rompe el alto */
+    padding: 10px;
+}
+
+/* ✅ La imagen NO puede superar el marco */
+.itemCard__img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+    /* ✅ no se corta */
+    object-position: center;
+
+    display: block;
+    /* ✅ evita espacios raros inline */
+}
+
+/* cuerpo */
+.itemCard__body {
+    padding: 12px 12px 14px;
+    display: grid;
+    gap: 6px;
+    flex: 1;
+}
+
+.itemCard__title {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.2;
+    color: var(--text);
+    font-weight: 800;
+}
+
+.itemCard__cat {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+.itemCard__price {
+    margin: 6px 0 0;
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.itemCard__link {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #eef2ff;
+    color: var(--primary);
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.itemCard__link:hover {
+    background: #e0e7ff;
+    border-color: #c7d2fe;
+    transform: translateY(-1px);
+}

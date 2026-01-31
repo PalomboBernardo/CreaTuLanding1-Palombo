@@ -1,33 +1,29 @@
+/* src/components/ItemListContainer/ItemListContainer.css */
+
 .ilc {
-    margin-top: 1rem;
-    padding: 1.25rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    background: #fff;
+    padding: 16px;
+}
+
+.ilc__header {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
 }
 
 .ilc__title {
-    margin: 0 0 .5rem;
-    font-size: 1.4rem;
-    color: #0f172a;
+    margin: 0;
+    font-size: 2rem;
 }
 
-.ilc__text {
-    margin: 0 0 1rem;
-    color: #475569;
+.ilc__subtitle {
+    margin: 0;
+    opacity: 0.8;
 }
 
-.ilc__placeholder {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: .75rem;
-}
-
-.card {
-    border: 1px solid #e5e7eb;
+.ilc__loading,
+.ilc__empty {
+    padding: 12px;
+    border: 1px dashed #cdd5df;
     border-radius: 12px;
-    padding: 1rem;
-    background: #f9fafb;
-    font-weight: 600;
-    color: #111827;
+    background: rgba(255, 255, 255, 0.6);
 }

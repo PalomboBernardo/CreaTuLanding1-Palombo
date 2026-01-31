@@ -1,10 +1,17 @@
+// src/components/CartWidget/CartWidget.jsx
+import { Link } from "react-router-dom";
 import "./CartWidget.css";
 
-const CartWidget = () => {
+const CartWidget = ({ totalItems = 0 }) => {
     return (
-        <button className="cartWidget" aria-label="Carrito de compras">
-            🛒 <span className="cartCount">0</span>
-        </button>
+        <Link
+            to="/cart"
+            className="cartWidget"
+            aria-label="Ir al carrito"
+        >
+            <span aria-hidden="true">🛒</span>
+            <span className="cartCount">{totalItems}</span>
+        </Link>
     );
 };
 

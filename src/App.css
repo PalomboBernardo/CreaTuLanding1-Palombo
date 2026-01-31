@@ -1,11 +1,30 @@
+/* src/App.css */
 .app {
     min-height: 100vh;
-    width: 100%;
-    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+}
 
-    max-width: 1200px;
-    margin: 0 auto;
+.page {
+    padding: 18px 0 28px;
+}
+
+.pageHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.pageTitle {
+    margin: 0;
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    letter-spacing: -0.02em;
+}
+
+.pageSubtitle {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.98rem;
 }

@@ -1,0 +1,110 @@
+.itemCount {
+    display: grid;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.qty {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--border, #e6e8ef);
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+}
+
+.qty__btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border, #e6e8ef);
+    background: #f6f8ff;
+    color: #0f172a;
+    font-size: 22px;
+    font-weight: 900;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* ✅ centra el símbolo */
+    line-height: 1;
+    /* ✅ evita descentrado */
+    user-select: none;
+
+    cursor: pointer;
+    transition: transform .08s ease, background .2s ease, border-color .2s ease;
+}
+
+.qty__btn:hover {
+    background: #eef2ff;
+    border-color: #cbd5ff;
+}
+
+.qty__btn:active {
+    transform: scale(0.98);
+}
+
+.qty__btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.qty__center {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+}
+
+.qty__value {
+    font-size: 18px;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: .2px;
+}
+
+.qty__unit {
+    font-size: 14px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.qty__hint {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.btnAdd {
+    width: 100%;
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+    transition: transform .08s ease, filter .2s ease;
+}
+
+.btnAdd:hover {
+    filter: brightness(1.03);
+}
+
+.btnAdd:active {
+    transform: scale(0.99);
+}
+
+.btnAdd:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.stockText {
+    margin: 0;
+    font-size: 12px;
+    color: #64748b;
+}
