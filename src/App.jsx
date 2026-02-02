@@ -1,10 +1,12 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 import NavBar from "./components/NavBar/NavBar.jsx";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer.jsx";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
 
+import Home from "./pages/Home.jsx";
+import StoreHub from "./pages/StoreHub.jsx";
 import Cart from "./pages/Cart.jsx";
 import Contact from "./pages/Contact.jsx";
 import Services from "./pages/Services.jsx";
@@ -13,69 +15,110 @@ import NotFound from "./pages/NotFound.jsx";
 import "./App.css";
 
 function App() {
+    // 📍 Ruta actual (para ocultar el NavBar en Home)
+    const location = useLocation();
+    const isHomePage = location.pathname === "/";
+
+    // 🛒 Estado del carrito
     const [cart, setCart] = useState([]);
 
-    const totalItems = useMemo(
-        () => cart.reduce((acc, it) => acc + it.qty, 0),
-        [cart]
-    );
+    // 🔢 Cantidad total de ítems en el carrito
+    const totalItems = useMemo(() => {
+        return cart.reduce(
+            (total, cartItem) => total + cartItem.qty,
+            0
+        );
+    }, [cart]);
 
-    // ✅ agrega (desde detalle)
-    const addToCart = (item, qty) => {
-        setCart((prev) => {
-            const existing = prev.find((p) => p.id === item.id);
-            if (existing) {
-                return prev.map((p) =>
-                    p.id === item.id ? { ...p, qty: p.qty + qty } : p
+    // ➕ Agregar producto al carrito
+    const addToCart = (item, quantity) => {
+        setCart((previousCart) => {
+            const existingItem = previousCart.find(
+                (product) => product.id === item.id
+            );
+
+            if (existingItem) {
+                return previousCart.map((product) =>
+                    product.id === item.id
+                        ? { ...product, qty: product.qty + quantity }
+                        : product
                 );
             }
-            return [...prev, { ...item, qty }];
+
+            return [...previousCart, { ...item, qty: quantity }];
         });
     };
 
-    // ✅ quita item completo
+    // ❌ Quitar producto del carrito
     const removeFromCart = (id) => {
-        setCart((prev) => prev.filter((p) => p.id !== id));
+        setCart((previousCart) =>
+            previousCart.filter(
+                (product) => product.id !== id
+            )
+        );
     };
 
-    const clearCart = () => setCart([]);
+    // 🧹 Vaciar carrito
+    const clearCart = () => {
+        setCart([]);
+    };
 
-    // ✅ NUEVO: actualiza cantidad desde el carrito (+ / -)
-    const updateQty = (id, nextQty) => {
-        setCart((prev) =>
-            prev
-                .map((p) => (p.id === id ? { ...p, qty: nextQty } : p))
-                .filter((p) => p.qty > 0)
+    // 🔄 Actualizar cantidad desde el carrito
+    const updateQuantity = (id, newQuantity) => {
+        setCart((previousCart) =>
+            previousCart
+                .map((product) =>
+                    product.id === id
+                        ? { ...product, qty: newQuantity }
+                        : product
+                )
+                .filter((product) => product.qty > 0)
         );
     };
 
     return (
         <>
-            <NavBar totalItems={totalItems} />
+            {/* 🚫 Ocultamos NavBar solo en el Home */}
+            {!isHomePage && (
+                <NavBar totalItems={totalItems} />
+            )}
 
             <Routes>
+                {/* 🏠 Home */}
+                <Route path="/" element={<Home />} />
+
+                {/* 🛍️ Tienda (hub de categorías) */}
+                <Route path="/tienda" element={<StoreHub />} />
+
+                {/* 📦 Catálogo completo */}
                 <Route
-                    path="/"
-                    element={<ItemListContainer greeting="Bienvenido a AgroStore" />}
-                />
-                <Route
-                    path="/tienda"
-                    element={<ItemListContainer greeting="Catálogo de productos" />}
+                    path="/tienda/productos"
+                    element={
+                        <ItemListContainer greeting="Catálogo de productos" />
+                    }
                 />
 
+                {/* 🧩 Categorías */}
                 <Route
                     path="/category/:categoryId"
-                    element={<ItemListContainer greeting="Productos por categoría" />}
+                    element={
+                        <ItemListContainer greeting="Productos por categoría" />
+                    }
                 />
 
+                {/* 🔍 Detalle de producto */}
                 <Route
                     path="/item/:itemId"
-                    element={<ItemDetailContainer onAddToCart={addToCart} />}
+                    element={
+                        <ItemDetailContainer onAddToCart={addToCart} />
+                    }
                 />
 
+                {/* 📄 Páginas informativas */}
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contact />} />
 
+                {/* 🛒 Carrito */}
                 <Route
                     path="/cart"
                     element={
@@ -83,11 +126,12 @@ function App() {
                             cart={cart}
                             onRemove={removeFromCart}
                             onClear={clearCart}
-                            onUpdateQty={updateQty}
+                            onUpdateQty={updateQuantity}
                         />
                     }
                 />
 
+                {/* ❓ Página no encontrada */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

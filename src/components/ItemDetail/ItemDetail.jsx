@@ -5,8 +5,8 @@ const money = (n) => Number(n).toLocaleString("es-AR", { maximumFractionDigits: 
 const percent = (n) => `${(Number(n) * 100).toFixed(1)}%`;
 
 const ItemDetail = ({ item, onAddToCart }) => {
-    const handleAdd = (qty) => {
-        if (typeof onAddToCart === "function") onAddToCart(item, qty);
+    const handleAdd = (quantity) => {
+        if (typeof onAddToCart === "function") onAddToCart(item, quantity);
     };
 
     const ivaRate = item.ivaRate ?? 0.21;
@@ -27,8 +27,8 @@ const ItemDetail = ({ item, onAddToCart }) => {
                 {/* bullets si existen */}
                 {Array.isArray(item.bullets) && item.bullets.length > 0 && (
                     <ul className="itemDetail__bullets">
-                        {item.bullets.map((b, i) => (
-                            <li key={`${item.id}-b-${i}`}>{b}</li>
+                        {item.bullets.map((bullet, index) => (
+                            <li key={`${item.id}-b-${index}`}>{bullet}</li>
                         ))}
                     </ul>
                 )}
@@ -37,7 +37,8 @@ const ItemDetail = ({ item, onAddToCart }) => {
                     <div className="itemDetail__priceLine">
                         <span className="itemDetail__label">Precio neto</span>
                         <span className="itemDetail__value">
-                            USD {money(priceNet)} <span className="itemDetail__muted">/ {item.unit}</span>
+                            USD {money(priceNet)}{" "}
+                            <span className="itemDetail__muted">/ {item.unit}</span>
                         </span>
                     </div>
 
@@ -47,7 +48,6 @@ const ItemDetail = ({ item, onAddToCart }) => {
                     </div>
                 </div>
 
-                {/* ✅ acá está la clave: step y unit vienen del producto */}
                 <ItemCount
                     stock={item.stock ?? 1000}
                     step={item.step ?? 1}

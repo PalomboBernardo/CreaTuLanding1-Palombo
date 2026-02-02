@@ -11,7 +11,7 @@ import "./ItemCount.css";
  * - initial: valor inicial (si no viene, usa step)
  * - step: paso (10 o 1)
  * - unit: "L" o "tn"
- * - onAdd(qty): callback para agregar al carrito
+ * - onAdd(quantity): callback para agregar al carrito
  */
 
 const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
@@ -28,8 +28,11 @@ const ItemCount = ({ stock = 1000, initial, step = 1, unit = "u", onAdd }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [safeStep, unit]);
 
-    const handleMinus = () => setCount((prev) => clamp(prev - safeStep, safeStep, stock));
-    const handlePlus = () => setCount((prev) => clamp(prev + safeStep, safeStep, stock));
+    const handleMinus = () =>
+        setCount((previousCount) => clamp(previousCount - safeStep, safeStep, stock));
+
+    const handlePlus = () =>
+        setCount((previousCount) => clamp(previousCount + safeStep, safeStep, stock));
 
     const handleAdd = () => {
         if (typeof onAdd === "function") onAdd(count);

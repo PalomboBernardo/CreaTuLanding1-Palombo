@@ -29,9 +29,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    /* ✅ centra el símbolo */
     line-height: 1;
-    /* ✅ evita descentrado */
     user-select: none;
 
     cursor: pointer;

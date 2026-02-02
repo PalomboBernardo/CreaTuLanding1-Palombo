@@ -27,32 +27,32 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
     const [phone, setPhone] = useState("");
 
     const rows = useMemo(() => {
-        return cart.map((p) => {
-            const ivaRate = IVA_BY_CATEGORY[p.category] ?? 0.21;
-            const { unit, step } = getUnitAndStep(p.category);
+        return cart.map((product) => {
+            const ivaRate = IVA_BY_CATEGORY[product.category] ?? 0.21;
+            const { unit, step } = getUnitAndStep(product.category);
 
-            const net = p.price * p.qty;
+            const net = product.price * product.qty;
             const iva = net * ivaRate;
             const total = net + iva;
 
-            return { ...p, ivaRate, unit, step, net, iva, total };
+            return { ...product, ivaRate, unit, step, net, iva, total };
         });
     }, [cart]);
 
-    const subtotal = rows.reduce((acc, r) => acc + r.net, 0);
-    const ivaTotal = rows.reduce((acc, r) => acc + r.iva, 0);
-    const grandTotal = rows.reduce((acc, r) => acc + r.total, 0);
+    const subtotal = rows.reduce((accumulator, row) => accumulator + row.net, 0);
+    const ivaTotal = rows.reduce((accumulator, row) => accumulator + row.iva, 0);
+    const grandTotal = rows.reduce((accumulator, row) => accumulator + row.total, 0);
 
-    const handleMinus = (p) => {
-        const { step } = getUnitAndStep(p.category);
-        const next = Math.max(0, p.qty - step);
-        onUpdateQty(p.id, next);
+    const handleMinus = (product) => {
+        const { step } = getUnitAndStep(product.category);
+        const nextQuantity = Math.max(0, product.qty - step);
+        onUpdateQty(product.id, nextQuantity);
     };
 
-    const handlePlus = (p) => {
-        const { step } = getUnitAndStep(p.category);
-        const next = p.qty + step;
-        onUpdateQty(p.id, next);
+    const handlePlus = (product) => {
+        const { step } = getUnitAndStep(product.category);
+        const nextQuantity = product.qty + step;
+        onUpdateQty(product.id, nextQuantity);
     };
 
     const buildWhatsappText = () => {
@@ -61,11 +61,11 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
         lines.push("Hola! Quiero confirmar un pedido en AgroStore:");
         lines.push("");
 
-        rows.forEach((r) => {
+        rows.forEach((row) => {
             lines.push(
-                `• ${r.title} — ${r.qty} ${r.unit} — Neto: $ ${money(r.net)} — IVA ${(r.ivaRate * 100).toFixed(
-                    1
-                )}%`
+                `• ${row.title} — ${row.qty} ${row.unit} — Neto: $ ${money(row.net)} — IVA ${(
+                    row.ivaRate * 100
+                ).toFixed(1)}%`
             );
         });
 
@@ -98,12 +98,11 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
     };
 
     const handleConfirm = () => {
-        // ✅ CTA principal: confirmar compra
         openWhatsapp();
     };
 
-    const handleWhatsappForm = (e) => {
-        e.preventDefault();
+    const handleWhatsappForm = (event) => {
+        event.preventDefault();
         openWhatsapp();
     };
 
@@ -112,7 +111,9 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
             <header className="cartHeader">
                 <div>
                     <h1 className="cartTitle">Carrito</h1>
-                    <p className="cartSubtitle">Revisá cantidades, IVA y totales por producto.</p>
+                    <p className="cartSubtitle">
+                        Revisá cantidades, IVA y totales por producto.
+                    </p>
                 </div>
 
                 {cart.length > 0 && (
@@ -128,7 +129,11 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                     <p>Agregá productos desde Tienda o desde el detalle.</p>
 
                     <div style={{ marginTop: 12 }}>
-                        <button className="btn btn--primary" onClick={() => navigate("/tienda")} type="button">
+                        <button
+                            className="btn btn--primary"
+                            onClick={() => navigate("/tienda")}
+                            type="button"
+                        >
                             Ir a Tienda
                         </button>
                     </div>
@@ -136,22 +141,28 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
             ) : (
                 <div className="cartGrid">
                     <section className="cartList">
-                        {rows.map((p) => (
-                            <article key={p.id} className="cartItem">
+                        {rows.map((product) => (
+                            <article key={product.id} className="cartItem">
                                 <div className="cartItem__imgWrap">
-                                    <img className="cartItem__img" src={p.image} alt={p.title} loading="lazy" />
+                                    <img
+                                        className="cartItem__img"
+                                        src={product.image}
+                                        alt={product.title}
+                                        loading="lazy"
+                                    />
                                 </div>
 
                                 <div className="cartItem__info">
-                                    <h3 className="cartItem__name">{p.title}</h3>
+                                    <h3 className="cartItem__name">{product.title}</h3>
 
                                     <div className="cartItem__meta">
-                                        <span className="pill">{p.category}</span>
+                                        <span className="pill">{product.category}</span>
                                         <span className="muted">
-                                            Precio neto: <strong>$ {money(p.price)}</strong> / {p.unit}
+                                            Precio neto: <strong>$ {money(product.price)}</strong> /{" "}
+                                            {product.unit}
                                         </span>
                                         <span className="muted">
-                                            IVA: <strong>{(p.ivaRate * 100).toFixed(1)}%</strong>
+                                            IVA: <strong>{(product.ivaRate * 100).toFixed(1)}%</strong>
                                         </span>
                                     </div>
 
@@ -159,7 +170,7 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                                         <div className="qty">
                                             <button
                                                 className="qty__btn"
-                                                onClick={() => handleMinus(p)}
+                                                onClick={() => handleMinus(product)}
                                                 aria-label="Restar"
                                                 type="button"
                                             >
@@ -167,12 +178,12 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                                             </button>
 
                                             <span className="qty__value">
-                                                {p.qty} {p.unit}
+                                                {product.qty} {product.unit}
                                             </span>
 
                                             <button
                                                 className="qty__btn"
-                                                onClick={() => handlePlus(p)}
+                                                onClick={() => handlePlus(product)}
                                                 aria-label="Sumar"
                                                 type="button"
                                             >
@@ -180,11 +191,15 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                                             </button>
 
                                             <span className="qty__hint">
-                                                (paso {p.step} {p.unit})
+                                                (paso {product.step} {product.unit})
                                             </span>
                                         </div>
 
-                                        <button className="btn btn--danger" onClick={() => onRemove(p.id)} type="button">
+                                        <button
+                                            className="btn btn--danger"
+                                            onClick={() => onRemove(product.id)}
+                                            type="button"
+                                        >
                                             Quitar
                                         </button>
                                     </div>
@@ -193,15 +208,15 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                                 <div className="cartItem__totals">
                                     <div className="row">
                                         <span>Subtotal (neto)</span>
-                                        <strong>$ {money(p.net)}</strong>
+                                        <strong>$ {money(product.net)}</strong>
                                     </div>
                                     <div className="row">
                                         <span>IVA</span>
-                                        <strong>$ {money(p.iva)}</strong>
+                                        <strong>$ {money(product.iva)}</strong>
                                     </div>
                                     <div className="row row--total">
                                         <span>Total</span>
-                                        <strong>$ {money(p.total)}</strong>
+                                        <strong>$ {money(product.total)}</strong>
                                     </div>
                                 </div>
                             </article>
@@ -226,20 +241,23 @@ const Cart = ({ cart, onRemove, onClear, onUpdateQty }) => {
                             <strong>$ {money(grandTotal)}</strong>
                         </div>
 
-                        {/* ✅ CTA PRINCIPAL */}
                         <button className="btn btn--primary" type="button" onClick={handleConfirm}>
                             Confirmar compra
                         </button>
 
-                        {/* ✅ CTA SECUNDARIO */}
-                        <button className="btn btn--ghost" type="button" onClick={() => navigate("/tienda")}>
+                        <button
+                            className="btn btn--ghost"
+                            type="button"
+                            onClick={() => navigate("/tienda")}
+                        >
                             Continuar comprando
                         </button>
 
                         <div className="waBox">
                             <h3 className="waTitle">Enviar presupuesto por WhatsApp</h3>
                             <p className="waHint">
-                                Ingresá tu número y te abrimos WhatsApp con el pedido listo para enviar.
+                                Ingresá tu número y te abrimos WhatsApp con el pedido listo para
+                                enviar.
                             </p>
 
                             <form onSubmit={handleWhatsappForm} className="waForm">

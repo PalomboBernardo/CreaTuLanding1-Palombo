@@ -1,7 +1,8 @@
 // src/services/products.js
 import { DATA } from "./mocks/products.js";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (milliseconds) =>
+    new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 export const products = {
     getProducts: async () => {
@@ -11,11 +12,11 @@ export const products = {
 
     getProductsByCategory: async (categoryId) => {
         await delay(600);
-        return DATA.filter((p) => p.category === categoryId);
+        return DATA.filter((product) => product.category === categoryId);
     },
 
     getProductById: async (id) => {
         await delay(600);
-        return DATA.find((p) => p.id === id) || null;
+        return DATA.find((product) => product.id === id) || null;
     },
 };

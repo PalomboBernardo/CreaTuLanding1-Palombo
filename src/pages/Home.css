@@ -1,0 +1,123 @@
+.home {
+    padding: 24px 0 32px;
+}
+
+/* HERO */
+.homeHero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 36px 24px;
+    text-align: center;
+}
+
+.homeLogo {
+    max-width: 230px;
+    width: 100%;
+    margin: 0 auto 18px;
+    display: block;
+}
+
+
+.homeTitle {
+    margin: 10px 0 6px;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+}
+
+.homeSubtitle {
+    margin: 0 auto;
+    max-width: 70ch;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+/* GRID PRINCIPAL */
+.homeGrid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.homeTile {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    transition: transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    text-align: left;
+}
+
+.homeTile:hover {
+    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.homeTile h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.homeTile p {
+    margin: 10px 0 0;
+    color: var(--muted);
+}
+
+/* CAROUSEL */
+.homeCarousel {
+    margin-top: 26px;
+}
+
+.homeCarouselHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.homeSectionTitle {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+.homeLink {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.homeLoading {
+    color: var(--muted);
+}
+
+/* Carrusel horizontal */
+.carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+}
+
+.carouselItem {
+    min-width: 280px;
+    scroll-snap-align: start;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .homeGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .homeHero {
+        padding: 28px 18px;
+    }
+
+    .carouselItem {
+        min-width: 260px;
+    }
+}
