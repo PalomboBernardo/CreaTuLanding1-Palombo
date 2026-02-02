@@ -13,7 +13,7 @@ Entrega correspondiente a **React Router – Navegación entre rutas**.
 
 ## 🎥 Demo de navegación
 
-![Demo navegación](./src/assets/Animation.gif)
+![Demo navegación](./src/assets/Animation-2.gif)
 
 ## 🛠️ Tecnologías
 - React
